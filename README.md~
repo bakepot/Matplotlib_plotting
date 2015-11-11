@@ -1,0 +1,6 @@
+# Matplotlib_plotting
+
+### Matplotlib style sheet
+The style sheet is saved in a location similar to this: /usr/local/bin/anaconda/lib/python2.7/site-packages/matplotlib/mpl-data/stylelib/
+
+Use "plt.style.use('bakerplotstyle')" to use the style sheet.  Python interpreter must be restarted to reload a modified style sheet.
