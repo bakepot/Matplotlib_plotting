@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 
 def basicplot(data, param_dict, xlabel="x-data", ylabel="y-data",
               suptitle="super title", title="title", xmin=0.,
-              xmax=10., squareaxes=False, filename='test.png'):
+              xmax=10., squareaxes=False, filename='test.png', dpi=150):
     """
     A helper function to make a graph.
     Derived from: http://matplotlib.org/faq/usage_faq.html
@@ -60,10 +60,10 @@ def basicplot(data, param_dict, xlabel="x-data", ylabel="y-data",
     
     # initialize instance of figure
     plt.style.use('bakerplotstyle')
-    goldratio = 1.618  # golden ratio for aesthetically pleasing plot
-    plotwidth = 3.25  # inches
-    fig = plt.figure(dpi=150, facecolor='0.8',
-                     figsize=(plotwidth, plotwidth/goldratio))
+    # goldratio = 1.618  # golden ratio for aesthetically pleasing plot
+    # plotwidth = 3.25  # inches
+    fig = plt.figure(dpi=dpi, facecolor='0.8')  # ,
+    #                 figsize=(plotwidth, plotwidth/goldratio))
     ax = plt.subplot(111)
     for i, y in enumerate(data[1]):
         plt.plot(data[0], y, linestyle=ls[i], linewidth=lw[i],
@@ -96,7 +96,7 @@ def basicplot(data, param_dict, xlabel="x-data", ylabel="y-data",
     plt.tick_params(axis='both', which='major', labelsize=8)
     plt.tick_params(axis='both', which='minor', labelsize=6)
 
-    plt.savefig(filename, dpi=150, bbox_inches='tight')
+    plt.savefig(filename, dpi=dpi, bbox_inches='tight')
 
     # display figure
     plt.show()
@@ -106,9 +106,23 @@ def basicplot(data, param_dict, xlabel="x-data", ylabel="y-data",
 
 if __name__ == "__main__":
 
-    d1 = np.linspace(0., 2.*np.pi, num=600)
-    d2 = np.cos(2.*np.pi*1*d1)
-    xlabel = r'$\omega={:4.1f}$'.format(14.3)
-    basicplot([d1,  d2],
-              {'color': 'b', 'linestyle': 'dashed', 'label': 'data'},
-              xlabel=xlabel)
+    # d1 = np.linspace(0., 2.*np.pi, num=600)
+    # d2 = np.cos(2.*np.pi*1*d1)
+    # xlabel = r'$\omega={:4.1f}$'.format(14.3)
+    # basicplot([d1,  d2],
+    #           {'color': 'b', 'linestyle': 'dashed', 'label': 'data'},
+    #           xlabel=xlabel)
+
+    t = np.linspace(0., 2.*np.pi, num=1000)
+    d1 = np.sin(2.*np.pi*0.125*t)
+    d2 = np.sin(2.*np.pi*0.75*t)
+    d3 = np.cos(2.*np.pi*0.125*t)
+    d4 = np.cos(2.*np.pi*0.75*t)
+    dataset1 = (t, (d1, d2, d3, d4))
+    param1 = ({'label': '$\\theta_0$'},
+              {'label': '$\\theta_1$'},
+              {'label': '$\\dot{\\theta_0}$'},
+              {'label': '$\\dot{\\theta_1}$'})
+    basicplot(dataset1, param1, xlabel=r'time, [s]',
+              ylabel=r'magnitude', title='Angles vs Time',
+              suptitle=' ', filename='Angles_vs_Time.png', xmax=np.max(t))
