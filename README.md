@@ -1,5 +1,11 @@
 # Matplotlib_plotting
 
+### TO-DO
+* add subplotting function
+* add ability to plot y-data vs various x-data arrays (right now, y-data can only be plotted vs the first and only x-data array, necessitating an interpolation function for other datasets with different x-data spacing)
+* add contour plot feature
+* add ability to override linestyle and linewidth with arguments to the calling function
+
 ### figure_plotting.py
 The functions in this script are used by other Python scripts to plot various data.
 
